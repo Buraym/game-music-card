@@ -1,14 +1,14 @@
 import "../styles/Card.css"
 import { useState } from "react";
-import BackspaceIcon from '@material-ui/icons/Backspace';
+/*import BackspaceIcon from '@material-ui/icons/Backspace';
 import CloseIcon from '@material-ui/icons/Close';
-import CreateIcon from '@material-ui/icons/Create';
+import CreateIcon from '@material-ui/icons/Create';*/
 
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import FastForwardIcon from '@material-ui/icons/FastForward';
 import FastRewindIcon from '@material-ui/icons/FastRewind';
-import LoopIcon from '@material-ui/icons/Loop';
+//import LoopIcon from '@material-ui/icons/Loop';
 
 function Card(props) {
 
@@ -23,7 +23,7 @@ function Card(props) {
                         <div className="card">
 
                             <div className="card-imagem-caixa">
-                                <img className="card-imagem" src={props.imagem}/>
+                                <img className="card-imagem" src={props.imagem} alt="imagem do jogo"/>
                             </div>
 
                             <div className="card-conteudo">
@@ -44,7 +44,7 @@ function Card(props) {
                                     }
                                     <FastForwardIcon />
                                 </div>
-                                <button className="card-botao-opcoes"></button>
+                                <button className="card-botao-opcoes" onClick={()=>{setOpcao(!opcao)}}></button>
                             </div>
 
                         </div>
