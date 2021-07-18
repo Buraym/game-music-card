@@ -1,3 +1,4 @@
+import "../styles/Card.css"
 import { useState } from "react";
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import CloseIcon from '@material-ui/icons/Close';
@@ -11,8 +12,8 @@ import LoopIcon from '@material-ui/icons/Loop';
 
 function Card(props) {
 
-    const [opcao, setOpcao] = useState(false)
-    const [play, setPlay] = useState(false)
+    const [opcao, setOpcao] = useState(true)
+    const [play, setPlay] = useState(true)
 
     return (
         <>
@@ -20,14 +21,32 @@ function Card(props) {
                 {
                     opcao ?
                         <div className="card">
-                            <img className="card-imagem"src={props.imagem}/>
-                            <label className="card-nome">{props.nome}</label>
-                            <div className="card-music">
-                                <FastRewindIcon />
-                                <PlayArrowIcon />
-                                <FastForwardIcon />
+
+                            <div className="card-imagem-caixa">
+                                <img className="card-imagem" src={props.imagem}/>
                             </div>
-                            <button className="card-botao-opcoes"></button>
+
+                            <div className="card-conteudo">
+                                <label className="card-nome">{props.nome}</label>
+                                {/*
+                                    <audio controls>
+                                        <source src="" type="audio/mpeg"/>
+                                        <source src="" type="audio/mpeg"/>
+                                    </audio>
+                                */}
+                                <div className="card-music">
+                                    <FastRewindIcon />
+                                    {
+                                        play ?
+                                            <PlayArrowIcon onClick={() => (setPlay(!play))}/>
+                                        :
+                                            <StopIcon onClick={() => (setPlay(!play))}/>
+                                    }
+                                    <FastForwardIcon />
+                                </div>
+                                <button className="card-botao-opcoes"></button>
+                            </div>
+
                         </div>
                     
                     :
