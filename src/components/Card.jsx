@@ -1,59 +1,66 @@
 import "../styles/Card.css"
 import { useState } from "react";
-/*import BackspaceIcon from '@material-ui/icons/Backspace';
-import CloseIcon from '@material-ui/icons/Close';
-import CreateIcon from '@material-ui/icons/Create';*/
-
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import FastForwardIcon from '@material-ui/icons/FastForward';
 import FastRewindIcon from '@material-ui/icons/FastRewind';
-//import LoopIcon from '@material-ui/icons/Loop';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 function Card(props) {
 
     const [opcao, setOpcao] = useState(true)
     const [play, setPlay] = useState(true)
+    const [adicionar, setAdicionar] = useState(false)
+
+    function PlayPause(){
+        setPlay(!play)
+    }
+
+    function Delete(lista, index){
+        delete lista[index]
+    }
 
     return (
         <>
-
-                {
-                    opcao ?
-                        <div className="card">
-
-                            <div className="card-imagem-caixa">
-                                <img className="card-imagem" src={props.imagem} alt="imagem do jogo"/>
-                            </div>
-
-                            <div className="card-conteudo">
-                                <label className="card-nome">{props.nome}</label>
-                                {/*
-                                    <audio controls>
-                                        <source src="" type="audio/mpeg"/>
-                                        <source src="" type="audio/mpeg"/>
-                                    </audio>
-                                */}
-                                <div className="card-music">
+            {
+                opcao ?
+                    <div className="card">
+                        <div className="card-imagem-caixa">
+                            <img className="card-imagem" src={props.imagem} alt="imagem do jogo"/>
+                        </div>
+                        <div className="card-conteudo"> 
+                            <label className="card-nome">{props.nome}</label>                                
+                            <div className="card-musica">
+                                <audio src={props.audio} preload="metadata" />
+                                <div className="card-musica-botoes">
                                     <FastRewindIcon />
-                                    {
-                                        play ?
-                                            <PlayArrowIcon onClick={() => (setPlay(!play))}/>
-                                        :
-                                            <StopIcon onClick={() => (setPlay(!play))}/>
-                                    }
+                                    { play ? <PlayArrowIcon onClick={PlayPause}/> : <StopIcon onClick={PlayPause}/> }
                                     <FastForwardIcon />
                                 </div>
-                                <button className="card-botao-opcoes" onClick={()=>{setOpcao(!opcao)}}></button>
+                                <div className="card-musica-caixa">
+                                    <label className="card-musica-tempo">0:00</label>
+                                    <input className="card-musica-slider" type="range"/>
+                                </div>
                             </div>
-
+                            <button className="card-botao-opcoes" onClick={()=>{setOpcao(!opcao)}}></button>
                         </div>
-                    
-                    :
-                        <div className="card">
-                            <button className="card-botao-opcoes"></button>
+                    </div>
+                :
+                    <div className="card">
+                        <div className="card-imagem-caixa">
+                            <img className="card-imagem" src={props.imagem} alt="imagem do jogo"/>
                         </div>
-                }
+                        <div className="card-conteudo">
+                            <div className="card-texto">
+                                <label>{props.autor}</label>
+                            </div>
+                            <div className="card-texto">
+                                <label>{props.copyright}</label>
+                            </div>
+                            <button className="card-botao-opcoes" onClick={()=>{setOpcao(!opcao)}}></button>
+                        </div>
+                    </div>
+            }
         </>
     );
 }

@@ -9,35 +9,53 @@ import Foto6 from "../assets/Zelda Breath of the Wild/710944.jpg"
 import { useState } from "react"
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ImageIcon from '@material-ui/icons/Image';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 function Home() {
 
     const [item, setItem] = useState(0)
+    const [imagem, setImagem] = useState("")
+    const [nome, setNome] = useState("")
+    const [musica, setMusica] = useState("")
 
     var musiclist = [
         {
             imagem:Foto1,
-            nome:"Assassin's Creed Odyssey"
+            nome:"Legend of The Eagle Bearer",
+            autor:"The Flight",
+            copyright:"Assassin's Creed Odyssey: Legend of the Eagle Bearer (Main Theme) | Music by The Flight"
         },
         {
             imagem:Foto2,
-            nome:"Halo 5 Guardians"
+            nome:"The Trials",
+            autor:"Kazuma Jinnouchi",
+            copyright:"Halo 5: Guardians © Microsoft Corporation"
         },
         {
             imagem:Foto3,
-            nome:"Outer Worlds"
+            nome:"Hope ( Menu Theme )",
+            autor:"Justin E. Bell",
+            copyright:"℗ 2019 Obsidian Entertainment under exclusive license to Take-Two Interactive Software, Inc."
         },
         {
             imagem:Foto4,
-            nome:"Spiderman PS4"
+            nome:"Spiderman PS4",
+            autor:"John Paesano (Original Version)",
+            copyright:"Marvel's Super-Man (PS4) Original full Main (Menu)"
         },
         {
             imagem:Foto5,
-            nome:"Titanfall 2"
+            nome:"Titanfall 2 Main Theme Song",
+            autor:"Stephen Barton",
+            copyright:"Titanfall 2 Soundtrack - Main Theme Song"
         },
         {
             imagem:Foto6,
-            nome:"Zelda Breath of the Wild"
+            nome:"Zelda Breath of the Wild",
+            autor:"Manaka Kataoka, Yasuaki Iwata, Hajime Wakai",
+            copyright:"The Legend of Zelda: Breath of the Wild"
         }
     ]
 
@@ -49,21 +67,34 @@ function Home() {
                 })
             */}
             <div className="carrosel-card">
-                <button>
-                    <ChevronLeftIcon onClick={()=>{
-                        if(item > 0){
-                            setItem(item - 1)
-                        }
-                    }}/>
-                </button>
-                <Card imagem={musiclist[item].imagem} nome={musiclist[item].nome}/>
-                <button className="botao-carrosel">
-                    <ChevronRightIcon onClick={()=>{
-                        if(item < ((musiclist.length)-1)){
-                            (setItem(item + 1))
-                        }
-                    }}/>
-                </button>
+                <ChevronLeftIcon onClick={()=>{
+                    if(item > 0){
+                        setItem(item - 1)
+                    }
+                }}/>
+                {
+                    (item == ((musiclist.length))) ?
+                        <div className="card">
+                            <div className="card-imagem-caixa">
+                                <div className="card-imagem"></div>
+                            </div>
+                            <div className="card-conteudo"> 
+                                <input className="card-nome-selecionar"/>
+                                <div>                    
+                                    <ImageIcon className="card-imagem-selecionar"/>
+                                    <MusicNoteIcon className="card-musica-selecionar"/>
+                                </div>
+                                <AddCircleIcon className="card-adicionar"/>
+                            </div>
+                        </div>
+                    :
+                        <Card imagem={musiclist[item].imagem} nome={musiclist[item].nome} autor={musiclist[item].autor} copyright={musiclist[item].copyright}/>
+                }
+                <ChevronRightIcon onClick={()=>{
+                    if(item < ((musiclist.length))){
+                        (setItem(item + 1))
+                    }
+                }}/>
             </div>
         </div>  
     );
